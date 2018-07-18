@@ -1,0 +1,26 @@
+:root {
+	--color: green;
+}
+
+body {
+	background: var(--color);
+	max-width: 900px;
+	margin: auto;
+}
+
+div {
+	position: relative;
+	max-width: 500px;
+	max-height: 500px;
+	margin: 0 auto;
+}
+
+button {
+	position: absolute;
+	font-size: 1.2em;
+	border-radius: 10px;
+	left: 150px;
+	width: 200px;
+	height: 70px;
+}
+

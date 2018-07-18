@@ -1,0 +1,1 @@
+console.log(Array.of(7,5, {length: 5}, 8))
