@@ -50,6 +50,8 @@
 // const b = {data: {items: [{name, price}, item2]}, status} = makeArrayOfItems();
 // console.log(name, price, item2, status, b)
 
+
+/////////////////////////////////////////
 function sleep(amount) {
   return new Promise( (resolve, reject) => {
     if (amount <= 300) {
@@ -68,3 +70,4 @@ sleep(1000).then( (result) => {
 }).then( (result) => {
   console.log('three ', result)
 })
+/////////////////////////////////////////////////
