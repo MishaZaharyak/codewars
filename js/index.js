@@ -197,6 +197,84 @@ function fizzBuzz() {
 		}
 	}
 }
+//////////////////////////////////
+
+
+//......the longest word in string
+function longestWord(sen) {
+	// create filtered array
+	const wordArr = sen.toLowerCase().match(/[a-z0-9]+/g)
+		.sort( (a,b) => b.length - a.length);
+
+	const longestWordArr = wordArr.filter(word => word.length === wordArr[0].length)
+
+	return longestWordArr.length > 1 ? longestWordArr : longestWordArr[0]
+}
+//////////////////////////
+
+// ......chunkArray([1,2,3,,4,5,6,7], 3) === [[1,2,3], [4,5,6], [7]]
+function chunkArray(arr, len) {
+	const chunkedArr = [];
+	let i = 0;
+
+	while(i < arr.length) {
+		chunkedArr.push(arr.slice(i, i + len));
+		i += len;
+	}
+	return chunkedArr;
+
+	// forEach()
+	const chunkedArr = [];
+
+	arr.forEach(el => {
+		const last = chunkedArr[chunkedArr - 1];
+		if(!last || last.length == len) {
+			chunkArray.push([val])
+		} else {
+			last.push([val])
+		}
+	});
+	return chunkedArr
+}
+////////////////////
+
+
+//......flatten array [[1,2,3], [4,5,6], [7]] === [1,2,3,,4,5,6,7]
+function flattenArray(array) {
+	return array.reduce( (a,b) => a.concat(b));
+
+	// SOLUTION 2
+	return [].concat.apply([], array);
+
+	// SOLUTION	3
+	return [].concat(...array);
+}
+/////////////////////////////
+
+
+// ......is Anagram
+function isAnagram(str1, str2) {
+	function formatStr(str) {
+		return str.replace(/[^\w]/g, '').toLowerCase()
+			.split('').sort().join('');
+	}
+	return formatStr(str1) === formatStr(str2)
+}
+
+// ....change letter on to next character after it
+// ....and capitalize the vowels
+function letterChanges(str) {
+	let newStr = str.toLowerCase().replace(/[a-z]/gi, char => {
+		if(char === 'z' || char === 'Z') {
+			return 'a';
+		} else {
+			return String.fromCharCode(char.charCodeAt() + 1);
+		}
+	});
+	newStr = newStr.replace(/a|e|i|o|u/gi, vowel => vowel.toUpperCase());
+	return newStr;
+}
+///////////////////////////////////////////
 
 
 
