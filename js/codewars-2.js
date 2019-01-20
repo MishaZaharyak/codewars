@@ -9,18 +9,9 @@ function displayValue(value) {
       minutes = minutes % 1440;
       const hours = Math.floor(minutes / 60);
       minutes = minutes % 60;
-     
-     if (minutes > 0 && hours === 0 && days === 0 && weeks === 0 && months === 0) {
-       console.log(`${minutes} minute`);                 
-     } else if (hours > 0 && days === 0 && weeks === 0 && months === 0) {
-       console.log(`${hours} hours ${minutes} minutes`);
-     } else if (days > 0 && weeks === 0 && months === 0) {
-       console.log(`${days} day ${hours} hours ${minutes} minutes`);
-     } else if (weeks > 0 && months === 0) {
-       console.log(`${weeks} week ${days} day ${hours} hours ${minutes} minutes`);
-     } else if (months > 0) {
-       console.log(`${months} month ${weeks} week ${days} day ${hours} hours ${minutes} minutes`);
-     }
+    
+    return `${months? months + ' month ' : ''}${weeks? weeks + ' week ' : 
+    ''}${days? days + ' day ' : ''}${hours? hours + ' hours ' : ''}${minutes? minutes + ' minutes' : ''}`
 }
 displayValue(58978);
 ///////////////////////////////////////////////////////////////
@@ -38,10 +29,7 @@ maxProduct([10, 8, 7, 9], 3); // 720
 
 // 3.....replace odd/even elements to another array
 //       then calculate total of both array
-
-// this one I can't understand?????
-rowWeights = arr => arr.reduce( (a, b, i) => 
-    (a[i % 2] += b, a), [0, 0]);
+const rowWeights = arr => arr.reduce( (a, b, i) => (a[i % 2] += b, a), [0, 0]);
 //....another way.....
 function rowWeights(array) {
   let arr = [0, 0];
@@ -52,10 +40,10 @@ function rowWeights(array) {
 }
 //.......another way......
 function rowWeights(arr) {
-  let t1 = arr.filter( (el, ind) => ind % 2 == 0)
+  const t1 = arr.filter( (el, ind) => ind % 2 == 0)
       .reduce( (a, item) => a + item, 0);
 
-  let t2 = arr.filter( (el, ind) => ind % 2 !=0)
+  const t2 = arr.filter( (el, ind) => ind % 2 !=0)
       .reduce( (a, item) => a + item, 0);
   return [t1, t2]
 }
@@ -84,63 +72,25 @@ function maxTriSum(numbers) {
          filtered[filtered.length - 2] + 
          filtered[filtered.length - 3];
 }
-//.....another way.........//////////
-function maxTriSum(numbers) {
-  const arr = [];
-  const sorted = numbers.sort( (a, b) => b - a);
-  while(arr.length < 3) {
-    const item = sorted.shift();
-    if (!arr.includes(item) ) {
-      arr.push(item);
-    }
-  }
-  return arr.reduce( (prev, curr) => prev += curr, 0);
-}
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// 5....my solution...//////
-function GetSum(a, b) {
-  if (a === b) {
-      console.log(a);
-  } else if (a > b) {
-   let total = 0; 
-   for (let i = b; i <= a; i++) {
-        total = total + i;
-   }
-   console.log(total);
-  } else {
-      let total = 0; 
-      for (let i = a; i <= b; i++) {
-           total = total + i;
-      }
-      console.log(total);
-  }
-}
-GetSum(-525, 235);
-
-//...another way.......
+// 5.......//////
 const GetSum = (a, b) => {
-  let min = Math.min(a, b),
-      max = Math.max(a, b);
+  const [min, max] = [Math.min(a, b), Math.max(a, b)]
   return (max - min + 1) * (min + max) / 2;
 }
 //...another way.......
 function GetSum( a,b ) {
-  if (a == b) {
-    return a;
-  } else if (a < b) {
-    return a + GetSum(a + 1, b); 
-  } else {
-    return a + GetSum(a - 1, b);
-  }
+    if (a == b) return a
+    return (a < b)? a + GetSum(a + 1, b) : a + GetSum(a - 1, b)
 }
 //...another way.......
-function GetSum(a, b) {
-  return (Math.abs(a - b) + 1) * (a + b) / 2;
-}
+const GetSum = (a, b) => (Math.abs(a - b) + 1) * (a + b) / 2;
+
 //...another way.......
 function GetSum(a, b) {
-  tmp = 0;
+  let tmp = 0;
+    
   if(a < b) {
     while(a <= b) tmp += a++;
   } else {
@@ -163,22 +113,4 @@ function GetSum( a,b ) {
 // 6.......multply array excluding each integer one by one
 // and push result to the new array 
 //Test - (productArray([13,10,5,2,9]), [900,1170,2340,5850,1300]);
-
-function productArray(arr) {
-  const sum = arr.reduce( (x, y) => x * y);
-  return arr.map(x => sum / x);
-}
-//...another way.......
-const productArray = arr => 
-  arr.map(n => arr.reduce( (a, b) => a * b) / n);
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
+const productArray = arr => arr.map(n => arr.reduce( (a, b) => a * b) / n);
