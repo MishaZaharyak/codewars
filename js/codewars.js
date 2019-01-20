@@ -25,30 +25,7 @@ console.log(feast("brown bear", "bear clar"));
 
 // 3.......return largest integer in array that is obtained by 
 //         comparing the equations
-function expressionMatter(a, b, c) {
-   let ex1 = a * (b + c),
-	   ex2 = a * b * c,
-	   ex3 = a + b * c,
-	   ex4 = (a + b) * c,
-	   ex5 = a + b + c;
-
-	   let array = [];
-	   array[0] = ex1;
-	   array[1] = ex2;
-	   array[2] = ex3;
-	   array[3] = ex4;
-	   array[4] = ex5;
-
-	   sortArr = array.sort(function(a, b) {
-	   		return a - b;
-	   });
-
-	   return sortArr.pop();
-}
-//
-//.......another way......................
- const expressionMatter = (a, b, c) => 
-    Math.max(a + b + c, a * (b + c), (a + b)* c, a * b * c);
+ const expressionMatter = (a, b, c) => Math.max(a + b + c, a * (b + c), (a + b)* c, a * b * c, a + b * c);
 
 
 // 4..........use indexOf() to count the number of leters in the row
