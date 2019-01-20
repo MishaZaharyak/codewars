@@ -55,7 +55,7 @@ console.log(takeVawels('asbciej fkAIydu'));
 // 6.........don't output any digits with number five
 //
 function dontGiveMeFive(start, end) {
-	let array, counter = [], 0;
+	let [array, counter] = [[], 0];
 	for (let i = start; i <= end; i++) {
 		if(/[5+]/.test(i) === true) {
 			continue;
@@ -165,7 +165,7 @@ Test.assertEquals(sentence(List), 'Vatsan took his dog for a spin');
 
 //.............. none repeat Character
 function firstNonRepeatChar(str) {
-    let len, charCount, obj = str.length, {}, [];
+    let [len, charCount, obj] = [str.length, {}, []];
     let char;
 	
     for(let i = 0; i < len; i++) {
@@ -188,12 +188,12 @@ firstNonRepeatChar('the quick brown fox jumps then quickly blow air');
 
 // ................remove duplicate
 function removeDuplicateChar(str) {
-    let len, charCount, newStr = str.length, {}, [];
+    let [len, charCount, newStr] = [str.length, {}, []];
     let char;
 	
     for(let i = 0; i < len; i++){
-		char = str[i];
-		charCount[char] = (charCount[char])? charCount[char]++ : 1;
+	char = str[i];
+	charCount[char] = (charCount[char])? charCount[char]++ : 1;
     }
 
     for (let j in charCount){
