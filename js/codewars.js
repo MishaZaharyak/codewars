@@ -1,8 +1,6 @@
 // 1......function that return string join with some separator(divider)
 function splitAndMerge (str, spl) {
-    const array = str.split(' ')
-        .map( el => el.split('').join(spl) ).join(' ');
-    return array;
+    return str.split(' ').map(el => el.split('').join(spl)).join(' ')
 }
 
 
@@ -80,8 +78,7 @@ console.log(takeVawels('asbciej fkAIydu'));
 // 6.........don't output any digits with number five
 //
 function dontGiveMeFive(start, end) {
-	let array = [];
-  let counter = 0;
+	let array, counter = [], 0;
 	for (let i = start; i <= end; i++) {
 		if(/[5+]/.test(i) === true) {
 			continue;
@@ -104,7 +101,6 @@ getAverage([1,1,1,1,1,1,1,2]);
 
 
 // 8.......return min value
-//
 function findSmallestInt(args) {
     let smallInt = 0;
     for(let i = 0; i < args.length; i++) {
@@ -115,61 +111,25 @@ function findSmallestInt(args) {
     return smallInt;
 }
 findSmallestInt([54,48,8,65,9,21]);
-//
 //........another way..............
 return Math.min(...args);
 
-// 9..........inspect number
-//
-function specialNumber(number) {
 
-   let result = /[^0-5]/gm.test(number);
-    if (result === true) {
-      return "NOT!!";
-    } else {
-      return "Spesial!!";
-    }
+// 9..........inspect number
+function specialNumber(number) {
+	return /[^0-5]/g.test(number)? 'Spesial!!' : 'NOT!!';
 }
 specialNumber(1238450);
-//
-//.....another way............
-return /[^0-5]/g.test(number)? 'Spesial!!' : 'NOT!!';
 
 // 10..........reduce positive element
 function positiveSum(arr) {
-	if (arr.length === 0) {
-		return arr = 0;
-	} else {
-		let newArray = [];
-		const reduced = (a, b) => a + b;
-		arr.forEach(function(el) {
-		  	if(el > 0) {
-		  		newArray.push(el);
-		  	} else {
-		  		newArray.push(0);
-		  	}
-	    });
-      return newArray.reduce(reduced);
-	}  
+	return arr.reduce((a, b) => a + (b > 0 ? b : 0), 0);  
 }
-//
-//......another way.................
-let total = 0;
-for (let i = 0; i < arr.length; i++) {
-	if (arr[i] > 0) {
-		total += arr[i];
-	}
-}
-return total;
-//
-//.....another way...................
-return arr.reduce((a, b) => a + (b > 0 ? b : 0),0);
-//
 //......another way..................
 return arr.filter(x => x >= 0).reduce( (a, b) => a + b, 0);
 
 
-//12........prints simple numbers.......
+//11........prints simple numbers.......
 nextPrime:
   for (let i = 2; i <= 100; i++) {
     for (let j = 2; j < i; j++) {
@@ -179,24 +139,14 @@ nextPrime:
   }
 
 
-// 13...........summing each integers (max * min) and return total sum
+// 12...........summing each integers (max * min) and return total sum
 function minSum(arr) {
-	let newArray = [];
 	arr.sort( (a, b) => a - b);
-	for (let i = 0; i < arr.length;) {
-		newArray.push(arr.pop() * arr.shift() );
-	}
-	let total = newArray.reduce( (a, b) => a + b);
+	let total = 0;
+	while(arr.length) total += arr.pop() * arr.shift();
 	return total;
 }
 minSum([12,6,10,26,3,24]);
-//
-//.......another way................
-arr.sort( (a, b) => a - b);
-let total = 0;
-while(arr.length) total += arr.pop() * arr.shift();
-return total;
-//
 //.......another way.................
 return arr.sort( (a, b) => a - b)
     .slice(0, arr.length / 2)
@@ -204,33 +154,20 @@ return arr.sort( (a, b) => a - b)
             acc += curr * arr[ arr.length - index - 1 ], 0);
 
 
-// 14...........element with word
+// 13...........element with word
 function count(number) {
-	let a = [];
-	for (let i = 1; i <= number; i++) {
-		a += i + ' sheep...';
-	}
-	return a;
+	return [...Array(number)].map((v, i) => i + 1 + ' sheep...').join('');
 }
-// //...another way...................
-return [...Array(number)]
-		.map((v, i) => i + 1 + ' sheep...')
-		    .join('');
-
 count(2);
 
 
-// 15.................return value in right order
+// 14.................return value in right order
 function sentence(list) {
-
-    let myObj = list.reduce( (acum, nextItem) => 
-        Object.assign(acum, nextItem));
+    const myObj = list.reduce( (acum, nextItem) => Object.assign(acum, nextItem));
 
     const ordered = [];
-    Object.keys(myObj).sort( (a, b) => a - b)
-        .forEach(key => ordered.push(myObj[key]) );
-
-        console.log(ordered.join(' '));
+    Object.keys(myObj).sort((a, b) => a - b).forEach(key => ordered.push(myObj[key]));
+	console.log(ordered.join(' '));
 }
 // //.....another way............
 const sentence = list => list
@@ -249,56 +186,11 @@ sentence( [{'4': 'dog' }, {'2': 'took'}, {'3': 'his'},
 Test.assertEquals(sentence(List), 'Vatsan took his dog for a spin'); 
 
 
-
-//...need to optimize..//////////////////////////////
-//
-function nextPrime(n){
-	//take much time :(
-	
-	if (n == 0 || n == 1) {
-		console.log(2);
-	} else {
-		let sum = n + 1;
-		let tot = sum;
-	
-	    nextPrime:
-	  	for (let i = sum; i <= tot; i++) {
-	  		tot++;
-	    	for (let j = 2; j < i; j++) {
-	      		if (i % j == 0) continue nextPrime;
-	    		}
-	    	console.log(i);
-	    	break;
-	  	}
-	}
-}
-nextPrime(14);
-//////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////
-// NOT FINISHED!!
-// function jumpingNumber(n){
-//     let k = n.toString().split('');
-//     console.log(k);
-//     k.reduce((acu, next) => {
-//         if (!(acu < next && next == acu + 1 || acu % next === 1)) {
-           
-//             console.log('no');
-//         } else {
-//             console.log('yes');
-//         }
-//     });
-// }
-
-// jumpingNumber(5656)
-///////////////////////////////////////////////////////////
-
 //.............. none repeat Character
 function firstNonRepeatChar(str) {
-    let len = str.length,
-        char, 
-        charCount = {},
-        obj = [];
+    let len, charCount, obj = str.length, {}, [];
+    let char;
+	
     for(let i = 0; i < len; i++) {
       char = str[i];
       if(charCount[char]) {
@@ -308,9 +200,9 @@ function firstNonRepeatChar(str) {
       else
         charCount[char] = 1;
     }
+	
     for (let j in charCount) {
-      if (charCount[j] == 1)
-         console.log(j);
+      if (charCount[j] == 1) console.log(j);
     }
     console.log(obj);
   }  
@@ -319,22 +211,16 @@ firstNonRepeatChar('the quick brown fox jumps then quickly blow air');
 
 // ................remove duplicate
 function removeDuplicateChar(str) {
-    let len = str.length,
-        char, 
-        charCount = {}, 
-        newStr = [];
+    let len, charCount, newStr = str.length, {}, [];
+    let char;
+	
     for(let i = 0; i < len; i++){
-      char = str[i];
-      if(charCount[char]) {
-        charCount[char]++;
-      }
-      else
-        charCount[char] = 1;
+		char = str[i];
+		charCount[char] = (charCount[char])? charCount[char]++ : 1;
     }
 
     for (let j in charCount){
-      if (charCount[j] == 1)
-         newStr.push(j);
+      if (charCount[j] == 1) newStr.push(j);
     }
     console.log(newStr);
   }
